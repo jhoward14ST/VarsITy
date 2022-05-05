@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Team VarsITy</title>
+    <link rel="stylesheet" href="./main.css" />
+</head>
+
+<body>
+    <header id="main-header" class="header">
+        <div class="container" id="header">
+            <h1 id="header-title">Team VarsITy</h1>
+        </div>
+    </header>
+    <div class="container" id="file">
+        <div id="fileTemplate">
+            <h4> File template component </h4>
+            <div id="template">
+                <button id="templateBtn">Download Template</button>
+            </div>
+        </div>
+        <div id="fileUpload">
+            <h4> File upload component </h4>
+            <div id="ctrlBar">
+                <button id="fileBtn">Choose File</button>
+                <button id="uploadBtn">Upload</button>
+            </div>
+        </div>
+        <div id="fileTest">
+            <h4> File test component </h4>
+            <div id="displayTest">
+                <!-- Allows you to select a text file and upload for viewing -->
+                <button id="displayBtn">Display</button>
+                <!-- Separated text file can be shown here -->
+                <textarea cols="40" rows="20" id="testOutput"></textarea>
+            </div>
+        </div>
+    </div>
+    <!-- JAVASCRIPT -->
+    <script>
+        // DOWNLOAD TEMPLATE BUTTON
+        // Gives functionality to 'Download Template'
+        // Imports sample csv data const
+
+        // Source: https://www.javatpoint.com/javascript-create-and-download-csv-file
+        const csvFileData =
+            [
+                ['Brazil', '2020/21', 'Net Importer', 'Import Dependent', 'Stock Increase', 'RUS', '171%', 'Above Average'],
+                ['Egypt', '2020/21', 'Net Importer', 'Import Dependent', 'Stock Increase', 'RUS', '320%', 'Above Average'],
+                ['Indonesia', '2020/21', 'Net Importer', 'Import Dependent', 'Stock Increase', 'RUS', '133%', 'Above Average'],
+                ['Japan', '2020/21', 'Net Importer', 'Import Dependent', 'Stock Increase', 'UA', '143%', 'Above Average'],
+                ['Viet Nam', '2020/21', 'Net Importer', 'Import Dependent', 'Stock Decrease', 'RUS', '233%', 'Above Average'],
+                ['Republic of Korea', '2020/21', 'Net Importer', 'Import Dependent', 'Stock Increase', 'UA', '208%', 'Above Average'],
+                ['United Kingdom', '2020/21', 'Net Importer', 'Import Dependent', 'Stock Decrease', 'UA', '138%', 'Above Average'],
+                ['China', '2020/21', 'Net Importer', 'Surplus', 'Stock Decrease', 'RUS', '221%', 'Above Average'],
+                ['Nigeria', '2020/21', 'Net Importer', 'Import Dependent', 'Stock Decrease', 'RUS', '11%', 'Below Average'],
+                ['South Africa', '2020/21', 'Net Importer', 'Import Dependent', 'Stock Decrease', 'RUS', '41%', 'Below Average'],
+                ['Thailand', '2020/21', 'Net Importer', 'Import Dependent', 'Stock Increase', 'RUS', '84%', 'Below Average'],
+                ['Mexico', '2020/21', 'Net Importer', 'Import Dependent', 'Stock Increase', 'RUS', '58%', 'Below Average'],
+                ['Philippines', '2020/21', 'Net Importer', 'Import Dependent', 'Stock Increase', 'RUS', '95%', 'Below Average'],
+                ['Saudi Arabia', '2020/21', 'Net Importer', 'Import Dependent', 'Stock Increase', 'RUS', '46%', 'Below Average'],
+                ['Turkey', '2020/21', 'Net Importer', 'Import Dependent', 'Stock Decrease', 'RUS', '62%', 'Below Average'],
+                ['Australia', '2020/21', 'Net Exporter', 'Surplus', 'Stock Decrease', 'UA', '48%', 'Below Average'],
+                ['Canada', '2020/21', 'Net Exporter', 'Surplus', 'Stock Decrease', 'UA', '63%', 'Below Average'],
+                ['European Union', '2020/21', 'Net Exporter', 'Surplus', 'Stock Increase', 'UA', '87%', 'Below Average'],
+                ['Argentina', '2020/21', 'Net Exporter', 'Surplus', 'Stock Increase', 'RUS', '27%', 'Below Average'],
+                ['India', '2020/21', 'Net Exporter', 'Surplus', 'Stock Decrease', 'RUS', '98%', 'Below Average'],
+                ['Kazakhstan', '2020/21', 'Net Exporter', 'Surplus', 'Stock Decrease', 'RUS', '5%', 'Below Average'],
+                ['Russian Federation', '2020/21', 'Net Exporter', 'Surplus', 'Stock Decrease', 'RUS', '12%', 'Below Average'],
+                ['Ukraine', '2020/21', 'Net Exporter', 'Surplus', 'Stock Increase', 'UA', '37%', 'Below Average'],
+                ['United States of America', '2020/21', 'Net Exporter', 'Surplus', 'Stock Increase', 'UA', '72%', 'Below Average'],
+                ['Brazil', '2021/22', 'Net Importer', 'Import Dependent', 'Stock Decrease', 'RUS', '171%', 'Above Average'],
+                ['Egypt', '2021/22', 'Net Importer', 'Import Dependent', 'Stock Decrease', 'RUS', '320%', 'Above Average'],
+                ['Indonesia', '2021/22', 'Net Importer', 'Import Dependent', 'Stock Decrease', 'RUS', '133%', 'Above Average'],
+                ['Japan', '2021/22', 'Net Importer', 'Import Dependent', 'Stock Decrease', 'UA', '143%', 'Above Average'],
+                ['Viet Nam', '2021/22', 'Net Importer', 'Import Dependent', 'Stock Decrease', 'RUS', '233%', 'Above Average'],
+                ['Republic of Korea', '2021/22', 'Net Importer', 'Import Dependent', 'Stock Decrease', 'UA', '208%', 'Above Average'],
+                ['United Kingdom', '2021/22', 'Net Importer', 'Import Dependent', 'Stock Decrease', 'UA', '138%', 'Above Average'],
+                ['China', '2021/22', 'Net Importer', 'Surplus', 'Stock Increase', 'RUS', '221%', 'Above Average'],
+                ['Nigeria', '2021/22', 'Net Importer', 'Import Dependent', 'Stock Decrease', 'RUS', '11%', 'Below Average'],
+                ['South Africa', '2021/22', 'Net Importer', 'Import Dependent', 'Stock Decrease', 'RUS', '41%', 'Below Average'],
+                ['Thailand', '2021/22', 'Net Importer', 'Import Dependent', 'Stock Decrease', 'RUS', '84%', 'Below Average'],
+                ['Mexico', '2021/22', 'Net Importer', 'Import Dependent', 'Stock Increase', 'RUS', '58%', 'Below Average'],
+                ['Philippines', '2021/22', 'Net Importer', 'Import Dependent', 'Stock Increase', 'RUS', '95%', 'Below Average'],
+                ['Saudi Arabia', '2021/22', 'Net Importer', 'Import Dependent', 'Stock Increase', 'RUS', '46%', 'Below Average'],
+                ['Turkey', '2021/22', 'Net Importer', 'Import Dependent', 'Stock Increase', 'RUS', '62%', 'Below Average'],
+                ['Australia', '2021/22', 'Net Exporter', 'Surplus', 'Stock Increase', 'UA', '48%', 'Below Average'],
+                ['Canada', '2021/22', 'Net Exporter', 'Surplus', 'Stock Decrease', 'UA', '63%', 'Below Average'],
+                ['European Union', '2021/22', 'Net Exporter', 'Surplus', 'Stock Decrease', 'UA', '87%', 'Below Average'],
+                ['Argentina', '2021/22', 'Net Exporter', 'Surplus', 'Stock Increase', 'RUS', '27%', 'Below Average'],
+                ['India', '2021/22', 'Net Exporter', 'Surplus', 'Stock Increase', 'RUS', '98%', 'Below Average'],
+                ['Kazakhstan', '2021/22', 'Net Exporter', 'Surplus', 'Stock Increase', 'RUS', '5%', 'Below Average'],
+                ['Russian Federation', '2021/22', 'Net Exporter', 'Surplus', 'Stock Increase', 'RUS', '12%', 'Below Average'],
+                ['Ukraine', '2021/22', 'Net Exporter', 'Surplus', 'Stock Increase', 'UA', '37%', 'Below Average'],
+                ['United States of America', '2021/22', 'Net Exporter', 'Surplus', 'Stock Increase', 'UA', '72%', 'Below Average'],
+            ];
+
+        var button = document.getElementById('templateBtn');
+        button.addEventListener('click', download);
+        function download() {
+            console.log('Should download template');
+
+            // Define the heading for each row of the data
+            var csv = 'Country,Year,NET-Import-Exp,Surplus-Deficit,YOY-Stock Decrease in Stock,Leans,FertUsePercentAvg,FertUseBucket\n';
+
+            // Merge the data with CSV
+            csvFileData.forEach(function (row) {
+                csv += row.join(',');
+                csv += '\n';
+            })
+
+            // Display the created CSV data on the web browser
+            document.write(csv);
+            var hiddenElement = document.createElement('a');
+            hiddenElement.href = 'data.text/csv;charset=utf-8,' + encodeURI(csv);
+            hiddenElement.target = '_blank';
+
+            // Provide the name for the CSV file to be downloaded
+            hiddenElement.download = 'DataTemplate.csv'
+            hiddenElement.click();
+        }
+        // DOWNLOAD TEMPLATE BUTTON
+
+        // CHOOSE FILE BUTTON
+        // Gives functionality to 'Choose File'
+        var button = document.getElementById('fileBtn');
+        button.addEventListener('click', select);
+
+        function select() {
+            console.log('Should open file dialog');
+            var input = document.createElement('input');
+            input.type = 'file';
+
+            input.onchange = e => {
+
+                // Getting a hold of the file reference
+                var file = e.target.files[0];
+
+                // Setting up the reader
+                var reader = new FileReader();
+                reader.readAsText(file, 'UTF-8');
+
+                // Writes string read from file to variable called csvString
+                reader.onload = readerEvent => {
+                    var csvString = readerEvent.target.result;
+                    /* TEST CODE
+                     * https://zetcode.com/javascript/exceljs/
+                    const Excel = require('exceljs');
+                    const wb = new ExcelJS.Workbook();
+                    const ws = wb.addWorksheet('file');
+                    localStorage.csvFile = ws;
+                    TEST CODE */
+
+                    // Stores csvString in the browser
+                    localStorage.csvText = csvString;
+                }
+            }
+            input.click();
+        }
+        // CHOOSE FILE BUTTON
+
+        // UPLOAD BUTTON
+        // Gives functionality to upload
+        var button = document.getElementById('uploadBtn');
+        button.addEventListener('click', upload);
+        function upload() {
+            /* TEST CODE
+             * https://zetcode.com/javascript/exceljs/
+            var testReader = new FileReader();
+            testReader.readAsText(localStorage.csvFile, 'UTF-8');
+            testReader.onload = readerEvent => {
+                var testString = readerEent.target.result;
+                console.log(localStorage.csvFile);
+            }
+            TEST CODE */
+
+            // Prints csvString to browser console
+            console.log(localStorage.csvText);
+        }
+        // UPLOAD BUTTON
+
+        // FILE TEST
+        var button = document.getElementById('displayBtn');
+        var textarea = document.getElementById('testOutput');
+
+        button.addEventListener('click', () => {
+            console.log('Should be displaying text shortly...');
+            var input = document.createElement('input');
+
+            // OLD POC CODE
+            input.type = 'file';
+
+            // Initial proof of concept begins here
+            input.onchange = e => {
+                var files = input.files;
+
+                if (files.length == 0) return;
+
+                const file = e.target.files[0];
+
+                var reader = new FileReader();
+
+                reader.onload = readerEvent => {
+                    const file = readerEvent.target.result;
+                    const lines = file.split(/\r\n|\n/);
+                    textarea.value = lines.join('\n');
+                    // Should be able to insert any localStorage string here
+                    // and have it display in the text box
+                    //localStorage.test = textarea.value;
+                    const grid = [];
+                    for (i = 0; i < lines.length; i++) {
+                        // Sets the array entry to each line of document
+                        grid[i] = lines[i];
+                        // Formats string to input syntax
+                        // grid[i] = `"${i}": [${grid[i]}],`;
+                    }
+                    //for (j = 0; j < grid.length; j++) {
+                        //console.log(grid[j]);
+                //}
+                var topRow = grid[0];
+                    const fields = [];
+                    for (j = 0; j < topRow.length; j += topRow.indexOf(",")) {
+                        for (g = 0; g < (j + 1); g++) {
+                            fields[g] = topRow.slice(j, topRow.indexOf(","));
+                        }
+                        console.log(j);
+                        console.log(`${fields[j]}`);
+                    }
+                //console.log(fields);
+                };
+                reader.onerror = (readerEvent) => alert(readerEvent.target.error.name);
+
+                reader.readAsText(file);
+            }
+            // OLD POC CODE */
+
+            // DISABLE OLD POC AND ENABLE BELOW FOR LOCALSTORAGE
+            // AND VICE VERSA
+            // Test for csv string stored in localStorage
+            //const lines = localStorage.csvText.split(/\r\n|\n/);
+            //textarea.value = lines.join('\n');
+
+            // INPUT STAYS ENABLED
+            input.click();
+        });
+                    // FILE TEST
+    </script>
+    <!-- JAVASCRIPT -->
+</body>
+
+</html>

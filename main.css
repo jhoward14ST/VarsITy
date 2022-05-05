@@ -1,0 +1,54 @@
+/* General page styling */
+div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#file {
+    width: 100%;
+}
+
+button {
+
+}
+/* General page styling */
+
+/* File TEMPLATE component */
+#fileTemplate {
+    width: 100%;
+    background-color: #e9ffdb;
+}
+#template {
+    width: 100%;
+}
+#templateBtn {
+    width: 100%;
+}
+/* File TEMPLATE component */
+
+/* File UPLOAD component */
+#fileUpload {
+    width: 100%;
+    background-color: #e7feff;
+}
+#ctrlBar {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    width: 100%;
+}
+/* File UPLOAD component */
+
+/* File TEST component */
+#fileTest {
+    width: 100%;
+    background-color: #ffefd5;
+}
+#displayTest {
+    display: grid;
+    width: 100%;
+}
+#testOutput {
+    height: 300px;
+}
+/* File TEST component */
