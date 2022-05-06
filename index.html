@@ -217,9 +217,10 @@
                         // Formats string to input syntax
                         // grid[i] = `"${i}": [${grid[i]}],`;
                     }
-                    //for (j = 0; j < grid.length; j++) {
-                        //console.log(grid[j]);
-                //}
+                    for (j = 0; j < grid.length; j++) {
+                        console.log(grid[j]);
+                    }
+                    /*
                 var topRow = grid[0];
                     const fields = [];
                     for (j = 0; j < topRow.length; j += topRow.indexOf(",")) {
@@ -229,6 +230,7 @@
                         console.log(j);
                         console.log(`${fields[j]}`);
                     }
+                    */
                 //console.log(fields);
                 };
                 reader.onerror = (readerEvent) => alert(readerEvent.target.error.name);
