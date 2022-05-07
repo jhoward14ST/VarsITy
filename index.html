@@ -13,6 +13,15 @@
     <header id="main-header" class="header">
         <div class="container" id="header">
             <h1 id="header-title">Team VarsITy</h1>
+            <p> Some notes as you're testing this functionality: </p> 
+            <ul>
+                <li>Don't press the download button, its not functional and will just crash the page.</li>
+                <li>Second, choose file lets you select the file and immediately stores information into the browser.</li>
+                <li>Upload doesn't do anything until I have a use for it.</li>
+                <li>Display button is what I've been using for testing and is taking place of the upload button so I can see results in both the console and screen.</li>
+                <li>I figured out that if you have blank lines in a saved csv file, that will throw a monkey wrench into things</li>
+                <li>It would be worthwhile to write some functions to ensure a weird csv file doesn't fuck it up. (It displayed as just a list of commas)</li>
+            </ul>
         </div>
     </header>
     <div class="container" id="file">
@@ -72,30 +81,6 @@
                 ['Russian Federation', '2020/21', 'Net Exporter', 'Surplus', 'Stock Decrease', 'RUS', '12%', 'Below Average'],
                 ['Ukraine', '2020/21', 'Net Exporter', 'Surplus', 'Stock Increase', 'UA', '37%', 'Below Average'],
                 ['United States of America', '2020/21', 'Net Exporter', 'Surplus', 'Stock Increase', 'UA', '72%', 'Below Average'],
-                ['Brazil', '2021/22', 'Net Importer', 'Import Dependent', 'Stock Decrease', 'RUS', '171%', 'Above Average'],
-                ['Egypt', '2021/22', 'Net Importer', 'Import Dependent', 'Stock Decrease', 'RUS', '320%', 'Above Average'],
-                ['Indonesia', '2021/22', 'Net Importer', 'Import Dependent', 'Stock Decrease', 'RUS', '133%', 'Above Average'],
-                ['Japan', '2021/22', 'Net Importer', 'Import Dependent', 'Stock Decrease', 'UA', '143%', 'Above Average'],
-                ['Viet Nam', '2021/22', 'Net Importer', 'Import Dependent', 'Stock Decrease', 'RUS', '233%', 'Above Average'],
-                ['Republic of Korea', '2021/22', 'Net Importer', 'Import Dependent', 'Stock Decrease', 'UA', '208%', 'Above Average'],
-                ['United Kingdom', '2021/22', 'Net Importer', 'Import Dependent', 'Stock Decrease', 'UA', '138%', 'Above Average'],
-                ['China', '2021/22', 'Net Importer', 'Surplus', 'Stock Increase', 'RUS', '221%', 'Above Average'],
-                ['Nigeria', '2021/22', 'Net Importer', 'Import Dependent', 'Stock Decrease', 'RUS', '11%', 'Below Average'],
-                ['South Africa', '2021/22', 'Net Importer', 'Import Dependent', 'Stock Decrease', 'RUS', '41%', 'Below Average'],
-                ['Thailand', '2021/22', 'Net Importer', 'Import Dependent', 'Stock Decrease', 'RUS', '84%', 'Below Average'],
-                ['Mexico', '2021/22', 'Net Importer', 'Import Dependent', 'Stock Increase', 'RUS', '58%', 'Below Average'],
-                ['Philippines', '2021/22', 'Net Importer', 'Import Dependent', 'Stock Increase', 'RUS', '95%', 'Below Average'],
-                ['Saudi Arabia', '2021/22', 'Net Importer', 'Import Dependent', 'Stock Increase', 'RUS', '46%', 'Below Average'],
-                ['Turkey', '2021/22', 'Net Importer', 'Import Dependent', 'Stock Increase', 'RUS', '62%', 'Below Average'],
-                ['Australia', '2021/22', 'Net Exporter', 'Surplus', 'Stock Increase', 'UA', '48%', 'Below Average'],
-                ['Canada', '2021/22', 'Net Exporter', 'Surplus', 'Stock Decrease', 'UA', '63%', 'Below Average'],
-                ['European Union', '2021/22', 'Net Exporter', 'Surplus', 'Stock Decrease', 'UA', '87%', 'Below Average'],
-                ['Argentina', '2021/22', 'Net Exporter', 'Surplus', 'Stock Increase', 'RUS', '27%', 'Below Average'],
-                ['India', '2021/22', 'Net Exporter', 'Surplus', 'Stock Increase', 'RUS', '98%', 'Below Average'],
-                ['Kazakhstan', '2021/22', 'Net Exporter', 'Surplus', 'Stock Increase', 'RUS', '5%', 'Below Average'],
-                ['Russian Federation', '2021/22', 'Net Exporter', 'Surplus', 'Stock Increase', 'RUS', '12%', 'Below Average'],
-                ['Ukraine', '2021/22', 'Net Exporter', 'Surplus', 'Stock Increase', 'UA', '37%', 'Below Average'],
-                ['United States of America', '2021/22', 'Net Exporter', 'Surplus', 'Stock Increase', 'UA', '72%', 'Below Average'],
             ];
 
         var button = document.getElementById('templateBtn');
@@ -153,7 +138,6 @@
                     const ws = wb.addWorksheet('file');
                     localStorage.csvFile = ws;
                     TEST CODE */
-
                     // Stores csvString in the browser
                     localStorage.csvText = csvString;
                 }
@@ -167,18 +151,6 @@
         var button = document.getElementById('uploadBtn');
         button.addEventListener('click', upload);
         function upload() {
-            /* TEST CODE
-             * https://zetcode.com/javascript/exceljs/
-            var testReader = new FileReader();
-            testReader.readAsText(localStorage.csvFile, 'UTF-8');
-            testReader.onload = readerEvent => {
-                var testString = readerEent.target.result;
-                console.log(localStorage.csvFile);
-            }
-            TEST CODE */
-
-            // Prints csvString to browser console
-            console.log(localStorage.csvText);
         }
         // UPLOAD BUTTON
 
@@ -188,67 +160,48 @@
 
         button.addEventListener('click', () => {
             console.log('Should be displaying text shortly...');
-            var input = document.createElement('input');
+            // Reads in file and splits by line
+            const lines = localStorage.csvText.split(/\r\n|\n/);
 
-            // OLD POC CODE
-            input.type = 'file';
+            // Should be able to insert any localStorage string here
+            // and have it display in the text box
 
-            // Initial proof of concept begins here
-            input.onchange = e => {
-                var files = input.files;
+            // Headers stores an array of the column descriptors split by the comma
+            const headers = lines[0].split(/[,]/);
 
-                if (files.length == 0) return;
-
-                const file = e.target.files[0];
-
-                var reader = new FileReader();
-
-                reader.onload = readerEvent => {
-                    const file = readerEvent.target.result;
-                    const lines = file.split(/\r\n|\n/);
-                    textarea.value = lines.join('\n');
-                    // Should be able to insert any localStorage string here
-                    // and have it display in the text box
-                    //localStorage.test = textarea.value;
-                    const grid = [];
-                    for (i = 0; i < lines.length; i++) {
-                        // Sets the array entry to each line of document
-                        grid[i] = lines[i];
-                        // Formats string to input syntax
-                        // grid[i] = `"${i}": [${grid[i]}],`;
-                    }
-                    for (j = 0; j < grid.length; j++) {
-                        console.log(grid[j]);
-                    }
-                    /*
-                var topRow = grid[0];
-                    const fields = [];
-                    for (j = 0; j < topRow.length; j += topRow.indexOf(",")) {
-                        for (g = 0; g < (j + 1); g++) {
-                            fields[g] = topRow.slice(j, topRow.indexOf(","));
-                        }
-                        console.log(j);
-                        console.log(`${fields[j]}`);
-                    }
-                    */
-                //console.log(fields);
-                };
-                reader.onerror = (readerEvent) => alert(readerEvent.target.error.name);
-
-                reader.readAsText(file);
+            // Creates arrays for all rows
+            const rows = [];
+            for (i = 0; i < lines.length - 2; i++) {
+                rows[i] = lines[i + 1].split(/[,]/);
             }
-            // OLD POC CODE */
 
-            // DISABLE OLD POC AND ENABLE BELOW FOR LOCALSTORAGE
-            // AND VICE VERSA
-            // Test for csv string stored in localStorage
-            //const lines = localStorage.csvText.split(/\r\n|\n/);
-            //textarea.value = lines.join('\n');
+            // Creates two dimensional array
+            var grid = new Array(lines.length);
+            for (i = 0; i < lines.length; i++) {
+                grid[i] = lines[i].split(/[,]/);
+            }
 
-            // INPUT STAYS ENABLED
-            input.click();
+            // Test to ensure elements are stored as arrays
+            for (i = 0; i < grid.length; i++) {
+                for (k = 0; k < grid[i][k].length; k++) {
+                    console.log(`INDEX: ${i} ROW CONTENTS: ${grid[i][k]}`);
+                }
+            }
+            // Textarea used as my visual tester
+            var printer = headers.join(" * ");
+            printer += "\n --------------------------------------------------------------------------------------------------------------- \n";
+            for (i = 0; i < rows.length; i++) {
+                //console.log(`Value of I is ${i}`);
+                for (k = 0; k < rows[i].length; k++) {
+                    printer += rows[i].join(" * ");
+                    if (k = rows.length - 1) {
+                        printer += "\n --------------------------------------------------------------------------------------------------------------- \n";
+                    }
+                }
+            }
+            textarea.value = printer;
         });
-                    // FILE TEST
+
     </script>
     <!-- JAVASCRIPT -->
 </body>
