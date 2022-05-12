@@ -10,7 +10,7 @@ import TextField from '@material-ui/core/TextField';
 import { HypernetxWidget } from '../../src/'
 
 const defaultUserInput = `{
-  "0": ["FN", "TH"],
+  "0": ["2", "OLD", "FASHIONS"],
   "1": ["TH", "JV"],
   "2": ["BM", "FN", "JA"],
   "3": ["JV", "JU", "CH", "BM"],
@@ -96,14 +96,7 @@ function Demo() {
                 </a>
             </Typography>
             <Typography>
-                This is hypergraph visualization tool that uses an Euler diagram--nodes
-                are circles and hyper edges are outlines (rubber bands)
-                containing the nodes/circles.
-
-                The input data being visualized in the tool can be edited using
-                the text area on the right. The input is in the same format as the
-                constructor for a <a href='https://github.com/pnnl/hypernetx'>HypernetX</a>
-                object--a dictionary mapping edges to lists of nodes.
+                2 Old Fashions
             </Typography>
 
         </Grid>
